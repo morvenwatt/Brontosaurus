@@ -1,0 +1,58 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Amatic SC', bold;
+}
+/*NAV BAR & Media Query*/
+/*Bronto Animation*/
+/*Landing Page & Media Query*/
+.videoContainer {
+    display: grid;
+    width: 80%;
+    grid-template-columns: 150px 150px;
+    grid-template-rows: 200px, 200px, 200px; 
+    grid-column-gap: 10px;
+    grid-row-gap: 15px;
+    margin: auto;
+}
+/*Grid & Media Query*/
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 80px;
+    grid-gap: 10px;
+}
+.rainbow {
+    border: 1px solid black;
+    border-radius: 15px;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 30px;
+}
+.green {
+    background: linear-gradient(lightgreen, white);
+}
+.yellow {
+    background: linear-gradient(yellow, white);
+}
+.orange {
+    background: linear-gradient(orange, white);
+}
+.red {
+background: linear-gradient(red, white);
+}
+.purple {
+    background: linear-gradient(magenta, white);
+}
+.brown {
+    background: linear-gradient(brown, white);
+}
+
+
+/*Individual Pages & Media Query*/
+/*Contact*/
+form {
+    display: flex;
+    flex-direction: column;
+}
+/*Footer*/
