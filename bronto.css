@@ -2,18 +2,19 @@
     box-sizing: border-box;
     font-family: 'Amatic SC', bold;
 }
-/*NAV BAR & Media Query*/
-/*Bronto Animation*/
-/*Landing Page & Media Query*/
-.videoContainer {
-    display: grid;
-    width: 80%;
-    grid-template-columns: 150px 150px;
-    grid-template-rows: 200px, 200px, 200px; 
-    grid-column-gap: 10px;
-    grid-row-gap: 15px;
-    margin: auto;
+h2 {
+    text-align: center;
 }
+/*NAV BAR & Media Query*/
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+/*Bronto Animation*/
+
+/*Landing Page & Media Query*/
+
 /*Grid & Media Query*/
 
 .container {
@@ -39,7 +40,7 @@
     background: linear-gradient(orange, white);
 }
 .red {
-background: linear-gradient(red, white);
+    background: linear-gradient(red, white);
 }
 .purple {
     background: linear-gradient(magenta, white);
@@ -56,3 +57,7 @@ form {
     flex-direction: column;
 }
 /*Footer*/
+footer {
+    text-align: center;
+    border-top: 1px solid green;
+}
