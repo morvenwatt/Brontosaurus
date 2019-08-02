@@ -36,61 +36,34 @@ const apiNutritionUrl = 'https://api.edamam.com/api/nutrition-data';
 const apiNutritionID = 'bd46c09c';
 const apiNutritionKey = 'ff5b5872e2cc181bb71b861377ecbdd3';
 
-//MUST URL ENCODE due to two word items with space but how ????
-  /* function formatQueryParams(params) {
-    const queryItems = Object.keys(params)
-      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-    return queryItems.join('&');
-  } 
 
-  function formatVeggieQuery (veggie) {
+
+ /*function formatVeggieQuery (veggie) {
       const queryVeggie = veggie.map (function {
           ${encodeURIComponent(veggie)}
       })
-  }
-
-  */
+  }*/
   
-
- const getVeggieRecipe = (veggie) => {
-    return fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${veggie}&number=1&ranking=1`)
-    .then(response => {
-          if (response.ok) {
-            return response.json()
-          } else {
-            Promise.reject('Recipe Not Found')
-          }
-        })
+ const getVeggieRecipe = async (veggie) => {
+    const response = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${veggie}&number=1&ranking=1`);
+   if (response.ok) {
+     return response.json();
+   }
+   else {
+     Promise.reject('Recipe Not Found');
+   }
       }
     
-const getVeggieNutrition = (veggie) => {
-    return fetch(`https://api.edamam.com/api/nutrition-data?app_id=bd46c09c&app_id=ff5b5872e2cc181bb71b861377ecbdd3&ingr=${veggie}`)
-        .then(response => {
-              if (response.ok) {
-                return response.json()
-              } else {
-                Promise.reject('Nutrition Data Not Found')
-              }
-            })
+const getVeggieNutrition = async (veggie) => {
+    const response = await fetch(`https://api.edamam.com/api/nutrition-data?app_id=bd46c09c&app_id=ff5b5872e2cc181bb71b861377ecbdd3&ingr=${veggie}`);
+  if (response.ok) {
+    return response.json();
+  }
+  else {
+    Promise.reject('Nutrition Data Not Found');
+  }
           }
     
-    /* SHould this be here or in display functions?
-    
-    function displayRecipe (responseJson){
-        console.log(responseJson);
-      for (let i = 0; i < responseJson.data.length; i++){
-        $('.recipe').append(
-          `<li><h3>${responseJson.}</h3>
-          <p>${responseJson.}</p>
-          <p>${responseJson.}</p>
-          <p>'${responseJson.}'</p>
-          <p>'${responseJson.}</p>
-          </li>`
-        )};
-    };
-     */
-
-
 
 /*Generation Functions*/
 function generateLandingPage (){
@@ -163,12 +136,12 @@ const generateVeggieInfo = (veggie) => {
     return `
     <h2>${veggie.name}</h2>
     <h3>Nutrition Information</h3>
-    <p>${getVeggieNutrition}<p>
+    <p class='nutrition'>${getVeggieNutrition}<p>
     <h3>Recipe:</h3>
-    <p>${getVeggieRecipe}</p>
+    <p class='recipe'>${getVeggieRecipe}</p>
     `
   }
-  //where does the formatting go? Ie. responseJson.data.recipeName/responseJson.data.ingredients? Display OR generate?
+  
 
 function generateContactPage (){
     return `
@@ -181,7 +154,7 @@ function generateContactPage (){
                 <input type="email" id="email" name="email" placeholder="BernieBronto@veggiepatch.com">
                 <label for="subject">Subject</label>
                 <textarea id="subject" name="subject" placeholder="Write something.."></textarea>
-                <input type="submit" value="Submit">
+                <button id='contact'>Submit</button>
     </form>
     `
 }
@@ -190,7 +163,7 @@ function generateContactPage (){
 
 function displayLandingPage (){ 
     $('main').html(generateLandingPage());
-    generateBrontoAnimation ();
+    //generateBrontoAnimation ();
 }
 
 const displayRainbowSection = (rainbow = VEGGIE_RAINBOW) => {
@@ -200,26 +173,69 @@ const displayRainbowSection = (rainbow = VEGGIE_RAINBOW) => {
 
  function displayContactPage (){
     $('main').html(generateContactPage());
-    generateBrontoAnimation();
+    //generateBrontoAnimation();
 } 
 
 const displayVeggieInfo = (veggie) => {
     $('main').main(generateVeggieInfo(veggie));
   }
 
+  function displayNutritionInfo (responseJson){ //of getVeggieNutrition
+    console.log(responseJson);
+  for (let i = 0; i < responseJson.totalNutrients.length; i++){
+    $('.nutrition').append(
+      `<li><h3>${veggie.name}</h3>
+      <p>${responseJson.totalNutrients[0].ENERC_KCAL}</p>
+      <p>${responseJson.totalNutrients[0].FAT}</p>
+      <p>'${responseJson.totalNutrients[0].FASAT}'</p>
+      <p>'${responseJson.totalNutrients[0].CHOCDF}</p>
+      <p>'${responseJson.totalNutrients[0].FIBTG}</p>
+      <p>'${responseJson.totalNutrients[0].SUGAR}</p>
+      </li>`
+    )};
+};
+
+  function displayRecipe (responseJson){ //of getVeggieRecipe//
+    console.log(responseJson);
+  for (let i = 0; i < responseJson.data.length; i++){
+    $('.recipe').append(
+      `<li><h3>${veggie.name}</h3>
+      <p>${responseJson.data.image}</p>
+      <p>${responseJson.data.title}</p>
+      <p>'${responseJson.data.name}'</p>
+      <p>'${responseJson.data.original}</p>
+      <p>'${responseJson.data.unitShort}</p>
+      </li>`
+    )};
+};
+
 /*Event Handlers*/
 
-function handleRainbowButton () {}
+function handleRainbowButton () {
+  $('main').on('click', '#rainbowButton', function (event) {
+    displayRainbowSection();
+})
+}
 
 const handleClickVeggie = () => {
     $('main').on('click', '.rainbow a', (event) => {
       let veggie = $(event.currentTarget()).data('veggie')
-      getVeggieInfo(veggie).then(displayVeggieInfo)
+      getVeggieInfo(veggie)
+      .then(displayVeggieInfo)
     })
   }
 
-function handleReturnToRainbowButton () {}
-function handleContactButton (){}
+function handleReturnToRainbowButton () {
+  $('main').on('click', '#rainbowReturn', function (event) {
+    displayRainbowSection();
+})
+}
+function handleContactButton (){
+  $('main').on('click', '#contact', function (event) {
+    //emial me?
+})
+}
+function handleNavLinks (){}
 
 /*Event Listeners*/
 
@@ -231,9 +247,10 @@ function setUpEventHandlers() {
 }
 
 function initializeUI() {
-  
+    displayLandingPage();
     setUpEventHandlers();
 }
+
 $(initializeUI);
 
 

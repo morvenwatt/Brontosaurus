@@ -5,6 +5,14 @@
 h2 {
     text-align: center;
 }
+button {
+    border: 1px solid white;
+    color: white;
+    width: 140px;
+    height: 40px;
+
+    background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); 
+}
 /*NAV BAR & Media Query*/
 nav {
     display: flex;
@@ -12,7 +20,10 @@ nav {
     justify-content: space-between;
 }
 /*Bronto Animation*/
-
+.bronto {
+    width: 80px;
+    height: 80px;
+}
 /*Landing Page & Media Query*/
 
 /*Grid & Media Query*/
@@ -29,6 +40,7 @@ nav {
     text-align: center;
     padding-top: 20px;
     font-size: 30px;
+    list-style-type: none;
 }
 .green {
     background: linear-gradient(lightgreen, white);
