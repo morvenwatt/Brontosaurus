@@ -1,3 +1,4 @@
+/*Functional Functions*/
 const VEGGIE_RAINBOW = {
     green: ["Artichoke", "Arugula", "Asparagus", 'Avocado', 'Beans, Green', 'Bitter Melon', 'Bok Choy',
             'Broad Beans', 'Broccoli', 'Broccoli Rabe', 'Brussel Sprouts', 'Cabbage, green', 'Celery',
@@ -19,16 +20,13 @@ const VEGGIE_RAINBOW = {
             'Figs', 'Guava', 'Java Plum', 'Pomelo', 'Plum', 'Prickly Pear', 'Prune', 'Turnip'],
     brown: ['Arrowroot', 'Mushrooms', 'Rutabaga'],
   }
-/*Functional Functions*/
 
-Object.entries(VEGGIE_RAINBOW).map(([color, veggies]) => {
-    return veggies.map(veggie =>`<li class="rainbow ${color}">${veggie}</li>`).join("\n")
-  })
+
 
 /*Bronto Animation*/
 // Get image & use animation to make him eat veggies, use move with fade!
 
-/*API Calls*/
+/*API Data*/
 const apiRecipeUrl = 'https://api.spoonacular.com/recipes/findByIngredients'; 
 const apiSpoonacularKey = '69f82379f1fa466fab11947cdaabe271';
 
@@ -38,7 +36,61 @@ const apiNutritionUrl = 'https://api.edamam.com/api/nutrition-data';
 const apiNutritionID = 'bd46c09c';
 const apiNutritionKey = 'ff5b5872e2cc181bb71b861377ecbdd3';
 
-//MUST URL ENCODE
+//MUST URL ENCODE due to two word items with space but how ????
+  /* function formatQueryParams(params) {
+    const queryItems = Object.keys(params)
+      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+    return queryItems.join('&');
+  } 
+
+  function formatVeggieQuery (veggie) {
+      const queryVeggie = veggie.map (function {
+          ${encodeURIComponent(veggie)}
+      })
+  }
+
+  */
+  
+
+ const getVeggieRecipe = (veggie) => {
+    return fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${veggie}&number=1&ranking=1`)
+    .then(response => {
+          if (response.ok) {
+            return response.json()
+          } else {
+            Promise.reject('Recipe Not Found')
+          }
+        })
+      }
+    
+const getVeggieNutrition = (veggie) => {
+    return fetch(`https://api.edamam.com/api/nutrition-data?app_id=bd46c09c&app_id=ff5b5872e2cc181bb71b861377ecbdd3&ingr=${veggie}`)
+        .then(response => {
+              if (response.ok) {
+                return response.json()
+              } else {
+                Promise.reject('Nutrition Data Not Found')
+              }
+            })
+          }
+    
+    /* SHould this be here or in display functions?
+    
+    function displayRecipe (responseJson){
+        console.log(responseJson);
+      for (let i = 0; i < responseJson.data.length; i++){
+        $('.recipe').append(
+          `<li><h3>${responseJson.}</h3>
+          <p>${responseJson.}</p>
+          <p>${responseJson.}</p>
+          <p>'${responseJson.}'</p>
+          <p>'${responseJson.}</p>
+          </li>`
+        )};
+    };
+     */
+
+
 
 /*Generation Functions*/
 function generateLandingPage (){
@@ -110,8 +162,13 @@ const generateRainbow = (rainbow) => {
 const generateVeggieInfo = (veggie) => {
     return `
     <h2>${veggie.name}</h2>
+    <h3>Nutrition Information</h3>
+    <p>${getVeggieNutrition}<p>
+    <h3>Recipe:</h3>
+    <p>${getVeggieRecipe}</p>
     `
   }
+  //where does the formatting go? Ie. responseJson.data.recipeName/responseJson.data.ingredients? Display OR generate?
 
 function generateContactPage (){
     return `
@@ -140,56 +197,15 @@ const displayRainbowSection = (rainbow = VEGGIE_RAINBOW) => {
     $('main').html(generateRainbowSection(rainbow))
   }
 
-  
-
-const getVeggieRecipe = (veggie) => {
-return fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${veggie}&number=1&ranking=1`)
-.then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        Promise.reject('Recipe Not Found')
-      }
-    })
-  }
-
-  const getVeggieNutrition = (veggie) => {
-    return fetch(`https://api.edamam.com/api/nutrition-data?app_id=bd46c09c&app_id=ff5b5872e2cc181bb71b861377ecbdd3&ingr=${veggie}`)
-    .then(response => {
-          if (response.ok) {
-            return response.json()
-          } else {
-            Promise.reject('Data Not Found')
-          }
-        })
-      }
-  
-      const displayVeggieInfo = (veggie) => {
-        $('main').main(generateVeggieInfo(veggie))
-      }
- 
-  
-  
-function displayNutritionInfo () {}
-
-/*function displayRecipe (responseJson){
-    console.log(responseJson);
-  for (let i = 0; i < responseJson.data.length; i++){
-    $('.recipe').append(
-      `<li><h3>${responseJson.}</h3>
-      <p>${responseJson.}</p>
-      <p>${responseJson.}</p>
-      <p>'${responseJson.}'</p>
-      <p>'${responseJson.}</p>
-      </li>`
-    )};
-};
- */
 
  function displayContactPage (){
     $('main').html(generateContactPage());
     generateBrontoAnimation();
 } 
+
+const displayVeggieInfo = (veggie) => {
+    $('main').main(generateVeggieInfo(veggie));
+  }
 
 /*Event Handlers*/
 
@@ -202,10 +218,24 @@ const handleClickVeggie = () => {
     })
   }
 
+function handleReturnToRainbowButton () {}
 function handleContactButton (){}
 
 /*Event Listeners*/
-/*Final Calls*/
+
+function setUpEventHandlers() {
+   handleClickVeggie();
+   handleRainbowButton();
+   handleReturnToRainbowButton();
+   handleContactButton();
+}
+
+function initializeUI() {
+  
+    setUpEventHandlers();
+}
+$(initializeUI);
+
 
 
   
