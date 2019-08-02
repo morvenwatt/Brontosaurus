@@ -1,33 +1,37 @@
 /*Functional Functions*/
 const VEGGIE_RAINBOW = {
-    green: ["Artichoke", "Arugula", "Asparagus", 'Avocado', 'Beans, Green', 'Bitter Melon', 'Bok Choy',
-            'Broad Beans', 'Broccoli', 'Broccoli Rabe', 'Brussel Sprouts', 'Cabbage, green', 'Celery',
-            'Chayote', 'Cherimoya', 'Chicory', 'Collards', 'Cucumber', 'Dandelion Greens', 'Edamame', 'Feijoa',
-            'Fiddleheads', 'Gooseberries', 'Grapes', 'Honeydew', 'Jackfruit', 'Kale', 'Kiwi', 'Leeks', 'Lettuce',
-            'Lime', 'Mustard Greens', 'Okra', 'Peas', 'Pear', 'Pepper, Bell', 'Runner Beans', 'Snow Peas', 'Sorrel',
-            'Soursop', 'Spinach', 'Swiss Chard', 'Tomatillo', 'Watercress', 'Zucchini'],
-    yellow: ['Bamboo', 'Banana', 'Belgian Endive', 'Bread Fruit', 'Carambola', 'Cassava', 'Cauliflower',
-            'Celery Root', 'Corn', 'Crookneck', 'Custard Apple', 'Daikon Radish', 'Durian', 'Fennel', 'Ginger Root',
-            'Horseradish', 'Jicama', 'Kohlrabi', 'Lemon', 'Longan', 'Onions, Yellow', 'Olives', 'Parsnip', 'Pineapple',
-            'Plantain', 'Potatoes', 'Quince', 'Sapodilla', 'Shallots', 'Spaghetti Squash','Sugar Apple', 'Yam'],
-    orange: ['Apricot', 'Butternut', 'Cantaloupe', 'Carrot', 'Clementine', 'Kumquat', 'Loquat', 'Lychee', 'Mandarin',
-            'Mango', 'Nectarine', 'Orange', 'Papaya', 'Passion Fruit', 'Peach', 'Pepper, Bell', 'Persimmon', 'Pumpkin',
-            'Sapote', 'Sweet Potato', 'Tangerine'],
-    red: ['Acerola', 'Cherry', 'Cranberry', 'Beetroot', 'Cabbage, Red', 'Grapefruit', 'Jujube Fruit', 'Onion, Red',
-          'Pepper, Red', 'Pitanga', 'Pomegranite', 'Potato, Red', 'Raddichio', 'Radish', 'Raspberries', 'Rhubarb',
-          'Rose Apple', 'Strawberries', 'Tomato', 'Watermelon'],
-    purple: ['Açai', 'Eggplant', 'Blackberries', 'Blcakcurrant', 'Blueberries', 'Date Fruit', 'Elderberries',
-            'Figs', 'Guava', 'Java Plum', 'Pomelo', 'Plum', 'Prickly Pear', 'Prune', 'Turnip'],
-    brown: ['Arrowroot', 'Mushrooms', 'Rutabaga'],
-  }
+  green: ["Artichoke", "Arugula", "Asparagus", 'Avocado', 'Beans, Green', 'Bitter Melon', 'Bok Choy',
+    'Broad Beans', 'Broccoli', 'Broccoli Rabe', 'Brussel Sprouts', 'Cabbage, green', 'Celery',
+    'Chayote', 'Cherimoya', 'Chicory', 'Collards', 'Cucumber', 'Dandelion Greens', 'Edamame', 'Feijoa',
+    'Fiddleheads', 'Gooseberries', 'Grapes', 'Honeydew', 'Jackfruit', 'Kale', 'Kiwi', 'Leeks', 'Lettuce',
+    'Lime', 'Mustard Greens', 'Okra', 'Peas', 'Pear', 'Pepper, Bell', 'Runner Beans', 'Snow Peas', 'Sorrel',
+    'Soursop', 'Spinach', 'Swiss Chard', 'Tomatillo', 'Watercress', 'Zucchini'],
+  yellow: ['Bamboo', 'Banana', 'Belgian Endive', 'Bread Fruit', 'Carambola', 'Cassava', 'Cauliflower',
+    'Celery Root', 'Corn', 'Crookneck', 'Custard Apple', 'Daikon Radish', 'Durian', 'Fennel', 'Ginger Root',
+    'Horseradish', 'Jicama', 'Kohlrabi', 'Lemon', 'Longan', 'Onions, Yellow', 'Olives', 'Parsnip', 'Pineapple',
+    'Plantain', 'Potatoes', 'Quince', 'Sapodilla', 'Shallots', 'Spaghetti Squash', 'Sugar Apple', 'Yam'],
+  orange: ['Apricot', 'Butternut', 'Cantaloupe', 'Carrot', 'Clementine', 'Kumquat', 'Loquat', 'Lychee', 'Mandarin',
+    'Mango', 'Nectarine', 'Orange', 'Papaya', 'Passion Fruit', 'Peach', 'Pepper, Bell', 'Persimmon', 'Pumpkin',
+    'Sapote', 'Sweet Potato', 'Tangerine'],
+  red: ['Acerola', 'Cherry', 'Cranberry', 'Beetroot', 'Cabbage, Red', 'Grapefruit', 'Jujube Fruit', 'Onion, Red',
+    'Pepper, Red', 'Pitanga', 'Pomegranite', 'Potato, Red', 'Raddichio', 'Radish', 'Raspberries', 'Rhubarb',
+    'Rose Apple', 'Strawberries', 'Tomato', 'Watermelon'],
+  purple: ['Açai', 'Eggplant', 'Blackberries', 'Blcakcurrant', 'Blueberries', 'Date Fruit', 'Elderberries',
+    'Figs', 'Guava', 'Java Plum', 'Pomelo', 'Plum', 'Prickly Pear', 'Prune', 'Turnip'],
+  brown: ['Arrowroot', 'Mushrooms', 'Rutabaga'],
+}
 
 
 
 /*Bronto Animation*/
 // Get image & use animation to make him eat veggies, use move with fade!
+/* function generateBrontoAnimation () {
+  $('.bronto').toggle("slide", { direction: "right" }, 1000);
+  $('.fruit').fadeOut (8000);
+} */
 
 /*API Data*/
-const apiRecipeUrl = 'https://api.spoonacular.com/recipes/findByIngredients'; 
+const apiRecipeUrl = 'https://api.spoonacular.com/recipes/findByIngredients';
 const apiSpoonacularKey = '69f82379f1fa466fab11947cdaabe271';
 
 
@@ -38,48 +42,47 @@ const apiNutritionKey = 'ff5b5872e2cc181bb71b861377ecbdd3';
 
 
 
- /*function formatVeggieQuery (veggie) {
-      const queryVeggie = veggie.map
-        (veggie => `${encodeURIComponent(veggie)}`);
-      } */
+/*function formatVeggieQuery (veggie) {
+     const queryVeggie = veggie.map
+       (veggie => `${encodeURIComponent(veggie)}`);
+     } */
 
 /* const options = {
   headers: new Headers({
     "X-Api-Key": apiSpoonacularKey,
     "Content-Type": json })
       }; */
-  
- const getVeggieRecipe = async (veggie) => {
-    const response = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${veggie}&number=1&ranking=1`);
-   if (response.ok) {
-     return response.json();
-   }
-   else {
-     Promise.reject('Recipe Not Found');
-   }
-      }
-    
+
+const getVeggieRecipe = async (veggie) => {
+  const response = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${veggie}&number=1&ranking=1`);
+  if (response.ok) {
+    return response.json();
+  }
+  else {
+    Promise.reject('Recipe Not Found');
+  }
+}
+
 const getVeggieNutrition = async (veggie) => {
-    const response = await fetch(`https://api.edamam.com/api/nutrition-data?app_id=bd46c09c&app_key=ff5b5872e2cc181bb71b861377ecbdd3&ingr=${veggie}`);
+  const response = await fetch(`https://api.edamam.com/api/nutrition-data?app_id=bd46c09c&app_key=ff5b5872e2cc181bb71b861377ecbdd3&ingr=${veggie}`);
   if (response.ok) {
     return response.json();
   }
   else {
     Promise.reject('Nutrition Data Not Found');
   }
-          }
-    
+}
+
 
 /*Generation Functions*/
-function generateLandingPage (){
-    return `
+function generateLandingPage() {
+  return `
     <h1>BRONTOSAURUS</h1>
-    <p class='welcome'>Welcome to Brontosaurus! We're happy you're here.
-        Brontosaurus is here to help you and your family eat more plants. 
+    <p class='welcome'>Welcome to Brontosaurus! We are here to help you and your family eat more plants. 
         When our daughter was born, we knew we wanted to ensure she tried 
         everything in the fruit and veggie rainbow.
         But, as a parent (and even if you're not!) it can be hard to break out of the grocery store rut.
-        You find yourself buying the same items - We're looking at you bell peppers - over and over. 
+        You find yourself buying the same items - We're looking at you bell peppers - over and over again. 
         We wanted to make sure she tried a variety of plants and we wanted to be able to track what she had tried.
         So, Brontosaurus was born. 
         The purpose of this app is to allow you to explore some veggies, fruits and legumes
@@ -117,17 +120,17 @@ function generateLandingPage (){
 }
 
 const generateRainbow = (rainbow) => {
-    return `
+  return `
     <ul class="rainbow">
     ${Object.entries(VEGGIE_RAINBOW).map(([color, veggies]) => {
-    return veggies.map(veggie =>`<li class="rainbow ${color}"><a data-veggie="${veggie}">${veggie}</a></li>`).join("\n")
-    })}
+    return veggies.map(veggie => `<li class="rainbow ${color}"><a data-veggie="${veggie}">${veggie}</a></li>`).join("\n")
+  })}
     <ul>
     `
-  }
-  
-  const generateRainbowSection = (rainbow) => {
-    return `
+}
+
+const generateRainbowSection = (rainbow) => {
+  return `
     <section>
     <header><h2>Welcome to the Rainbow!</h2><header>
     <main>
@@ -135,21 +138,22 @@ const generateRainbow = (rainbow) => {
     </main>
     </section>
     `
-  }
+}
 
 const generateVeggieInfo = (veggie) => {
-    return `
+  return `
     <h2>${veggie}</h2>
     <h3>Nutrition Information</h3>
     <p class='nutrition'>${getVeggieNutrition}<p>
     <h3>Recipe:</h3>
     <p class='recipe'>${getVeggieRecipe}</p>
+    <button id='rainbowReturn'>Return to the Rainbow</button>
     `
-  }
-  
+}
 
-function generateContactPage (){
-    return `
+
+function generateContactPage() {
+  return `
     <h2>Contact Us</h2>
     <form>
             <form action="/action_page.php">
@@ -166,28 +170,28 @@ function generateContactPage (){
 
 /*Display Functions*/
 
-function displayLandingPage (){ 
-    $('main').html(generateLandingPage());
-    //generateBrontoAnimation ();
+function displayLandingPage() {
+  $('main').html(generateLandingPage());
+  //generateBrontoAnimation ();
 }
 
 const displayRainbowSection = (rainbow = VEGGIE_RAINBOW) => {
-    $('main').html(generateRainbowSection(rainbow))
-  }
+  $('main').html(generateRainbowSection(rainbow))
+}
 
 
- function displayContactPage (){
-    $('main').html(generateContactPage());
-    //generateBrontoAnimation();
-} 
+function displayContactPage() {
+  $('main').html(generateContactPage());
+  //generateBrontoAnimation();
+}
 
 const displayVeggieInfo = (veggie) => {
-    $('main').html(generateVeggieInfo());
-  }
+  $('main').html(generateVeggieInfo());
+}
 
-  function displayNutritionInfo (responseJson){ //of getVeggieNutrition
-    console.log(responseJson);
-  for (let i = 0; i < responseJson.totalNutrients.length; i++){
+function displayNutritionInfo(responseJson) { //of getVeggieNutrition
+  console.log(responseJson);
+  for (let i = 0; i < responseJson.totalNutrients.length; i++) {
     $('.nutrition').append(
       `<li><h3>${veggie.name}</h3>
       <p>${responseJson.totalNutrients[0].ENERC_KCAL}</p>
@@ -197,12 +201,13 @@ const displayVeggieInfo = (veggie) => {
       <p>'${responseJson.totalNutrients[0].FIBTG}</p>
       <p>'${responseJson.totalNutrients[0].SUGAR}</p>
       </li>`
-    )};
+    )
+  };
 };
 
-  function displayRecipe (responseJson){ //of getVeggieRecipe//
-    console.log(responseJson);
-  for (let i = 0; i < responseJson.data.length; i++){
+function displayRecipe(responseJson) { //of getVeggieRecipe//
+  console.log(responseJson);
+  for (let i = 0; i < responseJson.data.length; i++) {
     $('.recipe').append(
       `<li><h3>${veggie.name}</h3>
       <p>${responseJson.data.image}</p>
@@ -211,63 +216,81 @@ const displayVeggieInfo = (veggie) => {
       <p>'${responseJson.data.original}</p>
       <p>'${responseJson.data.unitShort}</p>
       </li>`
-    )};
+    )
+  };
 };
 
 /*Event Handlers*/
 
-function handleRainbowButton () {
+function handleRainbowButton() {
   $('main').on('click', '#rainbowButton', function (event) {
     displayRainbowSection();
-})
+  })
 }
 
 const handleClickVeggie = () => {
-    $('main').on('click', '.rainbow a', (event) => {
-      let veggie = $(event.currentTarget).data('veggie')
-      getVeggieNutrition(veggie)
-      getVeggieRecipe (veggie)
+  $('main').on('click', '.rainbow a', (event) => {
+    let veggie = $(event.currentTarget).data('veggie')
+    getVeggieNutrition(veggie)
+    getVeggieRecipe(veggie)
       .then(displayVeggieInfo)
-    })
-  }
+  })
+}
 
-function handleReturnToRainbowButton () {
+function handleRainbowReturnButton() {
   $('main').on('click', '#rainbowReturn', function (event) {
     displayRainbowSection();
-})
+  })
 }
-function handleContactButton (){
+function handleContactButton() {
   $('main').on('click', '#contact', function (event) {
     //emial me?
-})
+  })
 }
-function handleNavLinks (){}
+function handleHomeLink() {
+  $('.homePage').on('click', function (event) {
+    displayLandingPage();
+  })
+}
+function handleRainbowLink() {
+  $('.rainbowPage').on('click', function (event) {
+    displayRainbowSection();
+  })
+}
+function handleContactLink() {
+  $('.contactPage').on('click', function (event) {
+    displayContactPage();
+  })
+}
 
 /*Event Listeners*/
 
 function setUpEventHandlers() {
-   handleClickVeggie();
-   handleRainbowButton();
-   handleReturnToRainbowButton();
-   handleContactButton();
+  handleClickVeggie();
+  handleRainbowButton();
+  handleRainbowReturnButton();
+  handleContactButton();
+  handleContactLink();
+  handleRainbowLink();
+  handleHomeLink();
 }
 
 function initializeUI() {
-    displayLandingPage();
-    setUpEventHandlers();
+  // generateBrontoAnimation ();
+  displayLandingPage();
+  setUpEventHandlers();
 }
 
 $(initializeUI);
 
 
 
-  
-  
- 
 
 
-  
 
-  
-  
-  
+
+
+
+
+
+
