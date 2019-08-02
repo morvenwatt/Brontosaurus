@@ -39,10 +39,15 @@ const apiNutritionKey = 'ff5b5872e2cc181bb71b861377ecbdd3';
 
 
  /*function formatVeggieQuery (veggie) {
-      const queryVeggie = veggie.map (function {
-          ${encodeURIComponent(veggie)}
-      })
-  }*/
+      const queryVeggie = veggie.map
+        (veggie => `${encodeURIComponent(veggie)}`);
+      } */
+
+/* const options = {
+  headers: new Headers({
+    "X-Api-Key": apiSpoonacularKey,
+    "Content-Type": json })
+      }; */
   
  const getVeggieRecipe = async (veggie) => {
     const response = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${veggie}&number=1&ranking=1`);
@@ -55,7 +60,7 @@ const apiNutritionKey = 'ff5b5872e2cc181bb71b861377ecbdd3';
       }
     
 const getVeggieNutrition = async (veggie) => {
-    const response = await fetch(`https://api.edamam.com/api/nutrition-data?app_id=bd46c09c&app_id=ff5b5872e2cc181bb71b861377ecbdd3&ingr=${veggie}`);
+    const response = await fetch(`https://api.edamam.com/api/nutrition-data?app_id=bd46c09c&app_key=ff5b5872e2cc181bb71b861377ecbdd3&ingr=${veggie}`);
   if (response.ok) {
     return response.json();
   }
@@ -134,7 +139,7 @@ const generateRainbow = (rainbow) => {
 
 const generateVeggieInfo = (veggie) => {
     return `
-    <h2>${veggie.name}</h2>
+    <h2>${veggie}</h2>
     <h3>Nutrition Information</h3>
     <p class='nutrition'>${getVeggieNutrition}<p>
     <h3>Recipe:</h3>
@@ -177,7 +182,7 @@ const displayRainbowSection = (rainbow = VEGGIE_RAINBOW) => {
 } 
 
 const displayVeggieInfo = (veggie) => {
-    $('main').main(generateVeggieInfo(veggie));
+    $('main').html(generateVeggieInfo());
   }
 
   function displayNutritionInfo (responseJson){ //of getVeggieNutrition
@@ -219,8 +224,9 @@ function handleRainbowButton () {
 
 const handleClickVeggie = () => {
     $('main').on('click', '.rainbow a', (event) => {
-      let veggie = $(event.currentTarget()).data('veggie')
-      getVeggieInfo(veggie)
+      let veggie = $(event.currentTarget).data('veggie')
+      getVeggieNutrition(veggie)
+      getVeggieRecipe (veggie)
       .then(displayVeggieInfo)
     })
   }
