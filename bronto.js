@@ -1,4 +1,19 @@
 /*Functional Functions*/
+function Veggie (name, recipe, nutrition) {
+  const processedRecipe = {
+    image, title, name:recipeName, original, unitShort
+  } = recipe
+  const processedNutrition = nutrition.map(nutrient => {
+    return processedNutrient = {
+      ENERC_KCAL, FAT, FASAT, CHOCDF, FIBTG, SUGAR
+    } = nutrient
+  })
+  return {
+    name, recipe:processedRecipe, nutrition:processedNutrition
+  }
+}
+
+
 const VEGGIE_RAINBOW = {
   green: ["Artichoke", "Arugula", "Asparagus", 'Avocado', 'Beans, Green', 'Bitter Melon', 'Bok Choy',
     'Broad Beans', 'Broccoli', 'Broccoli Rabe', 'Brussel Sprouts', 'Cabbage, green', 'Celery',
@@ -27,7 +42,7 @@ const VEGGIE_RAINBOW = {
 // Get image & use animation to make him eat veggies, use move with fade!
 /* function generateBrontoAnimation () {
   $('.bronto').toggle("slide", { direction: "right" }, 1000);
-  $('.fruit').fadeOut (8000);
+  $('.fruit').fadeOut (8000); BUT - fade each one indiv. so that it looks like he's eating each one. 
 } */
 
 /*API Data*/
@@ -46,7 +61,7 @@ const apiNutritionKey = 'ff5b5872e2cc181bb71b861377ecbdd3';
      const queryVeggie = veggie.map
        (veggie => `${encodeURIComponent(veggie)}`);
      } */
-
+//THESE DONT FUCKING WORK 
 /* const options = {
   headers: new Headers({
     "X-Api-Key": apiSpoonacularKey,
@@ -56,20 +71,22 @@ const apiNutritionKey = 'ff5b5872e2cc181bb71b861377ecbdd3';
 const getVeggieRecipe = async (veggie) => {
   const response = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${veggie}&number=1&ranking=1`);
   if (response.ok) {
-    return response.json();
+    const responseRecipe = await response.json();
+    return responseRecipe;
   }
   else {
-    Promise.reject('Recipe Not Found');
+    throw new Error ('Recipe Not Found');
   }
 }
 
 const getVeggieNutrition = async (veggie) => {
   const response = await fetch(`https://api.edamam.com/api/nutrition-data?app_id=bd46c09c&app_key=ff5b5872e2cc181bb71b861377ecbdd3&ingr=${veggie}`);
   if (response.ok) {
-    return response.json();
+    const responseNutrition = await response.json();
+    return responseNutrition;
   }
   else {
-    Promise.reject('Nutrition Data Not Found');
+    throw new Error ('Nutrition Data Not Found');
   }
 }
 
@@ -142,12 +159,19 @@ const generateRainbowSection = (rainbow) => {
 
 const generateVeggieInfo = (veggie) => {
   return `
-    <h2>${veggie}</h2>
+    <article>
+    <h2>${veggie.name}</h2>
+    <section class='nutrition'>
     <h3>Nutrition Information</h3>
-    <p class='nutrition'>${getVeggieNutrition}<p>
-    <h3>Recipe:</h3>
-    <p class='recipe'>${getVeggieRecipe}</p>
+    <ul>${}
+    
+    </section>
+
+    <section class='recipe'>
+    <h3>Recipe</h3>
+    ${}</section>
     <button id='rainbowReturn'>Return to the Rainbow</button>
+    </article> 
     `
 }
 
@@ -186,39 +210,9 @@ function displayContactPage() {
 }
 
 const displayVeggieInfo = (veggie) => {
-  $('main').html(generateVeggieInfo());
+  $('main').html(generateVeggieInfo(veggie));
 }
 
-function displayNutritionInfo(responseJson) { //of getVeggieNutrition
-  console.log(responseJson);
-  for (let i = 0; i < responseJson.totalNutrients.length; i++) {
-    $('.nutrition').append(
-      `<li><h3>${veggie.name}</h3>
-      <p>${responseJson.totalNutrients[0].ENERC_KCAL}</p>
-      <p>${responseJson.totalNutrients[0].FAT}</p>
-      <p>'${responseJson.totalNutrients[0].FASAT}'</p>
-      <p>'${responseJson.totalNutrients[0].CHOCDF}</p>
-      <p>'${responseJson.totalNutrients[0].FIBTG}</p>
-      <p>'${responseJson.totalNutrients[0].SUGAR}</p>
-      </li>`
-    )
-  };
-};
-
-function displayRecipe(responseJson) { //of getVeggieRecipe//
-  console.log(responseJson);
-  for (let i = 0; i < responseJson.data.length; i++) {
-    $('.recipe').append(
-      `<li><h3>${veggie.name}</h3>
-      <p>${responseJson.data.image}</p>
-      <p>${responseJson.data.title}</p>
-      <p>'${responseJson.data.name}'</p>
-      <p>'${responseJson.data.original}</p>
-      <p>'${responseJson.data.unitShort}</p>
-      </li>`
-    )
-  };
-};
 
 /*Event Handlers*/
 
@@ -228,12 +222,13 @@ function handleRainbowButton() {
   })
 }
 
-const handleClickVeggie = () => {
+const handleClickVeggie = async () => {
   $('main').on('click', '.rainbow a', (event) => {
-    let veggie = $(event.currentTarget).data('veggie')
-    getVeggieNutrition(veggie)
-    getVeggieRecipe(veggie)
-      .then(displayVeggieInfo)
+    let veggieName = $(event.currentTarget).data('veggie')
+    const veggieNutrition = await getVeggieNutrition(veggieName)
+    const veggieRecipe = await getVeggieRecipe(veggieName)
+    const veggie = Veggie(veggieName, veggieRecipe, veggieNutrition)
+     displayVeggieInfo(veggie);
   })
 }
 
@@ -244,7 +239,7 @@ function handleRainbowReturnButton() {
 }
 function handleContactButton() {
   $('main').on('click', '#contact', function (event) {
-    //emial me?
+    //email me? Like make the submit button send an email? Is this possible
   })
 }
 function handleHomeLink() {
@@ -261,7 +256,7 @@ function handleContactLink() {
   $('.contactPage').on('click', function (event) {
     displayContactPage();
   })
-}
+} //why don't any of you fuckers work?!?!
 
 /*Event Listeners*/
 
