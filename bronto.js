@@ -1,8 +1,6 @@
 /*Functional Functions*/
 function VeggieOverlord(name, recipe, nutrition) {
-  const processedRecipe = { //object.values(recipe)
-    image, title, name: recipeName, original, unitShort
-  } = recipe
+  const processedRecipe = Object.values(recipe)
   const processedNutrition = Object.values(nutrition)
   const veggie = {
     name, recipe: processedRecipe, nutrition: processedNutrition
@@ -164,7 +162,13 @@ const generateVeggieInfo = (veggie) => {
 </section>
 <section class='recipe'>
 <h3>Recipe</h3>
-${veggie.recipe}
+${veggie.recipe.map( //stringify?
+  recipe => `
+  <li>
+  ${recipe.title} ${recipe.usedIngredients.original} ${recipe.missedIngredients.original} 
+  </li>
+  `
+).join('\n')}
 </section>
 <button id='rainbowReturn'>Return to the Rainbow</button>
 </article> 
@@ -172,11 +176,12 @@ ${veggie.recipe}
 }
 
 /*
-var obj = {"1":5,"2":7,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0}
+var obj = {XYZ}
 var result = Object.keys(obj).map(function(key) {
   return [Number(key), obj[key]];
 });
 */
+
 function generateContactPage() {
   return `
 <h2>Contact Us</h2>
