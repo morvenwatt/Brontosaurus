@@ -1,16 +1,14 @@
 /*Functional Functions*/
-function Veggie (name, recipe, nutrition) {
-  const processedRecipe = {
-    image, title, name:recipeName, original, unitShort
+function VeggieOverlord(name, recipe, nutrition) {
+  const processedRecipe = { //object.values(recipe)
+    image, title, name: recipeName, original, unitShort
   } = recipe
-  const processedNutrition = nutrition.map(nutrient => {
-    return processedNutrient = {
-      ENERC_KCAL, FAT, FASAT, CHOCDF, FIBTG, SUGAR
-    } = nutrient
-  })
-  return {
-    name, recipe:processedRecipe, nutrition:processedNutrition
+  const processedNutrition = Object.values(nutrition)
+  const veggie = {
+    name, recipe: processedRecipe, nutrition: processedNutrition
   }
+  console.log(processedRecipe)
+  return veggie
 }
 
 
@@ -49,44 +47,34 @@ const VEGGIE_RAINBOW = {
 const apiRecipeUrl = 'https://api.spoonacular.com/recipes/findByIngredients';
 const apiSpoonacularKey = '69f82379f1fa466fab11947cdaabe271';
 
-
-
 const apiNutritionUrl = 'https://api.edamam.com/api/nutrition-data';
 const apiNutritionID = 'bd46c09c';
 const apiNutritionKey = 'ff5b5872e2cc181bb71b861377ecbdd3';
 
 
 
-/*function formatVeggieQuery (veggie) {
-     const queryVeggie = veggie.map
-       (veggie => `${encodeURIComponent(veggie)}`);
-     } */
-//THESE DONT FUCKING WORK 
-/* const options = {
-  headers: new Headers({
-    "X-Api-Key": apiSpoonacularKey,
-    "Content-Type": json })
-      }; */
+
+
 
 const getVeggieRecipe = async (veggie) => {
-  const response = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${veggie}&number=1&ranking=1`);
+  const response = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=69f82379f1fa466fab11947cdaabe271&ingredients=${encodeURIComponent(veggie)}&number=1&ranking=1`);
   if (response.ok) {
     const responseRecipe = await response.json();
     return responseRecipe;
   }
   else {
-    throw new Error ('Recipe Not Found');
+    throw new Error('Recipe Not Found');
   }
 }
 
 const getVeggieNutrition = async (veggie) => {
-  const response = await fetch(`https://api.edamam.com/api/nutrition-data?app_id=bd46c09c&app_key=ff5b5872e2cc181bb71b861377ecbdd3&ingr=${veggie}`);
+  const response = await fetch(`https://api.edamam.com/api/nutrition-data?app_id=bd46c09c&app_key=ff5b5872e2cc181bb71b861377ecbdd3&ingr=1%20${encodeURIComponent(veggie)}`);
   if (response.ok) {
     const responseNutrition = await response.json();
-    return responseNutrition;
+    return responseNutrition.totalNutrients;
   }
   else {
-    throw new Error ('Nutrition Data Not Found');
+    throw new Error('Nutrition Data Not Found');
   }
 }
 
@@ -100,10 +88,11 @@ function generateLandingPage() {
         everything in the fruit and veggie rainbow.
         But, as a parent (and even if you're not!) it can be hard to break out of the grocery store rut.
         You find yourself buying the same items - We're looking at you bell peppers - over and over again. 
-        We wanted to make sure she tried a variety of plants and we wanted to be able to track what she had tried.
-        So, Brontosaurus was born. 
-        The purpose of this app is to allow you to explore some veggies, fruits and legumes
-        you may not have tried. It shows the nutrition info, and offers recipes involving said item. 
+        Or, you make the same things over and over, and when you do buy a new veggie or fruit, it sits in the fridge
+        like a lonely dinosaur because you aren't really sure what to do with it!
+        The purpose of this app is to allow you to explore fruits and veggies
+        you may not have tried, or give you new ideas for old favorites. 
+        It shows the nutrition info, and offers recipes involving said item. 
         Enjoy the fun rainbow grid with your little one(s), or just as an adult,
         because, who doesn't love a rainbow? </p>
 
@@ -124,12 +113,12 @@ function generateLandingPage() {
         <h2>Video Information</h2>
     <section class='videoContainer'> 
         <p>Baby Led Weaning</p>
-        <p>How to Prep food for Babies</p>
         <iframe width='200' height='150' controls loop muted src="https://www.youtube.com/embed/i6ntYHXP6Xc"></iframe>
+        <p>How to Prep food for Babies</p>
         <iframe width='200' height='150' controls loop muted src='https://www.youtube.com/embed/B7D9xOh4Jhw'></iframe>
         <p>CPR for babies</p>
-        <p>Benefits of Eating Plants!</p>
         <iframe width='200' height='150' controls loop muted src='https://www.youtube.com/embed/n65HW1iJUuY'></iframe>
+        <p>Benefits of Eating Plants!</p>
         <iframe width='200' height='150' controls loop muted src='https://www.youtube.com/embed/xnKaOL2IBPY'></iframe>
     </section>
        
@@ -141,7 +130,7 @@ const generateRainbow = (rainbow) => {
     <ul class="rainbow">
     ${Object.entries(VEGGIE_RAINBOW).map(([color, veggies]) => {
     return veggies.map(veggie => `<li class="rainbow ${color}"><a data-veggie="${veggie}">${veggie}</a></li>`).join("\n")
-  })}
+  }).join('\n')}
     <ul>
     `
 }
@@ -157,39 +146,51 @@ const generateRainbowSection = (rainbow) => {
     `
 }
 
+
 const generateVeggieInfo = (veggie) => {
   return `
     <article>
     <h2>${veggie.name}</h2>
     <section class='nutrition'>
     <h3>Nutrition Information</h3>
-    <ul>${}
-    
-    </section>
+    <ul>${veggie.nutrition.map(
+    nutrient => `
+      <li>
+       ${nutrient.label} ${nutrient.quantity}${nutrient.unit}
+      </li>
+      `
+  ).join('\n')}
 
-    <section class='recipe'>
-    <h3>Recipe</h3>
-    ${}</section>
-    <button id='rainbowReturn'>Return to the Rainbow</button>
-    </article> 
-    `
+</section>
+<section class='recipe'>
+<h3>Recipe</h3>
+${veggie.recipe}
+</section>
+<button id='rainbowReturn'>Return to the Rainbow</button>
+</article> 
+`
 }
 
-
+/*
+var obj = {"1":5,"2":7,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0}
+var result = Object.keys(obj).map(function(key) {
+  return [Number(key), obj[key]];
+});
+*/
 function generateContactPage() {
   return `
-    <h2>Contact Us</h2>
-    <form>
-            <form action="/action_page.php">
-                <label for="fname">Name</label>
-                <input type="text" id="name" name="name" placeholder="Bernie Brontosaur" required>
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="BernieBronto@veggiepatch.com">
-                <label for="subject">Subject</label>
-                <textarea id="subject" name="subject" placeholder="Write something.."></textarea>
-                <button id='contact'>Submit</button>
-    </form>
-    `
+<h2>Contact Us</h2>
+<form>
+        <form action="/action_page.php">
+            <label for="fname">Name</label>
+            <input type="text" id="name" name="name" placeholder="Bernie Brontosaur" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="BernieBronto@veggiepatch.com">
+            <label for="subject">Subject</label>
+            <textarea id="subject" name="subject" placeholder="Write something.."></textarea>
+            <button id='contact'>Submit</button>
+</form>
+`
 }
 
 /*Display Functions*/
@@ -222,13 +223,13 @@ function handleRainbowButton() {
   })
 }
 
-const handleClickVeggie = async () => {
-  $('main').on('click', '.rainbow a', (event) => {
+function handleClickVeggie() {
+  $('main').on('click', '.rainbow a', async (event) => {
     let veggieName = $(event.currentTarget).data('veggie')
     const veggieNutrition = await getVeggieNutrition(veggieName)
     const veggieRecipe = await getVeggieRecipe(veggieName)
-    const veggie = Veggie(veggieName, veggieRecipe, veggieNutrition)
-     displayVeggieInfo(veggie);
+    const veggie = VeggieOverlord(veggieName, veggieRecipe, veggieNutrition)
+    displayVeggieInfo(veggie);
   })
 }
 
@@ -256,7 +257,7 @@ function handleContactLink() {
   $('.contactPage').on('click', function (event) {
     displayContactPage();
   })
-} //why don't any of you fuckers work?!?!
+}
 
 /*Event Listeners*/
 

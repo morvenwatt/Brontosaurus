@@ -71,6 +71,7 @@ ul {
 
 
 /*Individual Pages & Media Query*/
+
 /*Contact*/
 form {
     display: flex;
@@ -81,3 +82,17 @@ footer {
     text-align: center;
     border-top: 1px solid green;
 }
+
+/*STYLING TO DO LIST:
+
+1. Make nav bar same rainbow RtL as buttons.
+2. Resize Grid and make it more viewer friendly.
+3. Center buttons and find best font color to view. 
+4. Correctly style info videos. Grid or flex?
+5. Make animation.
+6. Properly style individual recipe and nutrition info pages.
+7. Correctly style tips 'n' tricks list & proofread.
+8. Style contact page.
+9. Style Links (on nav and elsewhere) with hover etc. 
+10. THINK ABOUT: Adding a next recipe button, & way to mark clicked items?
+ //page still wouldnt remember when reloaded
