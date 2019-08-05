@@ -49,11 +49,6 @@ const apiNutritionUrl = 'https://api.edamam.com/api/nutrition-data';
 const apiNutritionID = 'bd46c09c';
 const apiNutritionKey = 'ff5b5872e2cc181bb71b861377ecbdd3';
 
-
-
-
-
-
 const getVeggieRecipe = async (veggie) => {
   const response = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=69f82379f1fa466fab11947cdaabe271&ingredients=${encodeURIComponent(veggie)}&number=1&ranking=1`);
   if (response.ok) {
@@ -86,7 +81,7 @@ function generateLandingPage() {
         everything in the fruit and veggie rainbow.
         But, as a parent (and even if you're not!) it can be hard to break out of the grocery store rut.
         You find yourself buying the same items - We're looking at you bell peppers - over and over again. 
-        Or, you make the same things over and over, and when you do buy a new veggie or fruit, it sits in the fridge
+        Or, if you do buy a new veggie or fruit, it sits in the fridge
         like a lonely dinosaur because you aren't really sure what to do with it!
         The purpose of this app is to allow you to explore fruits and veggies
         you may not have tried, or give you new ideas for old favorites. 
@@ -145,6 +140,12 @@ const generateRainbowSection = (rainbow) => {
 }
 
 
+function formatMissedIngredients(missedIngredients) {
+  return missedIngredients.map(ingredient => {
+    return ingredient.original;
+  })
+}
+
 const generateVeggieInfo = (veggie) => {
   return `
     <article>
@@ -158,29 +159,26 @@ const generateVeggieInfo = (veggie) => {
       </li>
       `
   ).join('\n')}
+  </ul>
 
 </section>
 <section class='recipe'>
 <h3>Recipe</h3>
-${veggie.recipe.map( //stringify?
-  recipe => `
-  <li>
-  ${recipe.title} ${recipe.usedIngredients.original} ${recipe.missedIngredients.original} 
-  </li>
-  `
-).join('\n')}
-</section>
-<button id='rainbowReturn'>Return to the Rainbow</button>
-</article> 
-`
+  ${veggie.recipe.map(
+    recipe => {
+      let missedIngredients = formatMissedIngredients(recipe.missedIngredients);
+      return `<ul>
+      <li> ${recipe.title} </li>
+      <li>${missedIngredients}</li>
+      <li>${recipe.usedIngredients[0].original}</li>
+      </li>
+      `})}
+      </ul>
+      </section>
+  <button id='rainbowReturn'>Return to the Rainbow</button>
+</article>`
 }
 
-/*
-var obj = {XYZ}
-var result = Object.keys(obj).map(function(key) {
-  return [Number(key), obj[key]];
-});
-*/
 
 function generateContactPage() {
   return `
@@ -281,17 +279,6 @@ function initializeUI() {
   displayLandingPage();
   setUpEventHandlers();
 }
-
 $(initializeUI);
-
-
-
-
-
-
-
-
-
-
 
 
