@@ -171,6 +171,7 @@ const generateVeggieInfo = (veggie) => {
       <li> ${recipe.title} </li>
       <li>${missedIngredients}</li>
       <li>${recipe.usedIngredients[0].original}</li>
+      <li>${recipe.missedIngredients[0].original}</li>
       </li>
       `})}
       </ul>
