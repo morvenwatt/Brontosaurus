@@ -27,7 +27,7 @@ const VEGGIE_RAINBOW = {
   red: ['Acerola', 'Cherry', 'Cranberry', 'Beetroot', 'Cabbage, Red', 'Grapefruit', 'Jujube Fruit', 'Onion, Red',
     'Pepper, Red', 'Pitanga', 'Pomegranite', 'Potato, Red', 'Raddichio', 'Radish', 'Raspberries', 'Rhubarb',
     'Rose Apple', 'Strawberries', 'Tomato', 'Watermelon'],
-  purple: ['Açai', 'Eggplant', 'Blackberries', 'Blcakcurrant', 'Blueberries', 'Date Fruit', 'Elderberries',
+  purple: ['Açai', 'Eggplant', 'Blackberries', 'Blackcurrant', 'Blueberries', 'Date Fruit', 'Elderberries',
     'Figs', 'Guava', 'Java Plum', 'Pomelo', 'Plum', 'Prickly Pear', 'Prune', 'Turnip'],
   brown: ['Arrowroot', 'Mushrooms', 'Rutabaga'],
 }
@@ -88,12 +88,16 @@ function generateLandingPage() {
         It shows the nutrition info, and offers recipes involving said item. 
         Enjoy the fun rainbow grid with your little one(s), or just as an adult,
         because, who doesn't love a rainbow? </p>
+        <div class='button'>
+        <button id='rainbowButton'>Check Out The Rainbow!</button> </div> 
+    `
+}
 
-        <button id='rainbowButton'>Check Out The Rainbow!</button>
-
-        <section class='tips'>
-                <h3>Tips & Tricks</h3>
-                    <ul>
+function generateInfoPage (){
+    return `
+    <section class='tips'>
+                <h2>Tips & Tricks</h2>
+                    <ul class='tricks'>
                         <li>Don't be afraid of herbs and spices! Be careful with spicy foods, but otherwise, let your tastebuds have fun!</li>
                         <li>If you've got a 'selective' eater, try and keep things relaxed and simple, i.e. only a couple, or single item at a time.</li>
                         <li>Give foods a second, third and fourth chance! Use those recipes and seasonings.</li>
@@ -101,22 +105,23 @@ function generateLandingPage() {
                         <li>Know the difference between choking and gagging - check out the videos below.</li>
                         <li> Amazon List </li>
                     </ul>
-            </section>
-        
-        <h2>Video Information</h2>
-    <section class='videoContainer'> 
-        <p>Baby Led Weaning</p>
-        <iframe width='200' height='150' controls loop muted src="https://www.youtube.com/embed/i6ntYHXP6Xc"></iframe>
-        <p>How to Prep food for Babies</p>
-        <iframe width='200' height='150' controls loop muted src='https://www.youtube.com/embed/B7D9xOh4Jhw'></iframe>
-        <p>CPR for babies</p>
-        <iframe width='200' height='150' controls loop muted src='https://www.youtube.com/embed/n65HW1iJUuY'></iframe>
-        <p>Benefits of Eating Plants!</p>
-        <iframe width='200' height='150' controls loop muted src='https://www.youtube.com/embed/xnKaOL2IBPY'></iframe>
-    </section>
-       
-    `
+            </section>    
+  <h2>Video Information</h2>
+  <section class='videoContainer'> 
+      <p>Baby Led Weaning</p>
+      <iframe width='200' height='150' controls loop muted src="https://www.youtube.com/embed/i6ntYHXP6Xc"></iframe>
+      <p>How to Prep food for Babies</p>
+      <iframe width='200' height='150' controls loop muted src='https://www.youtube.com/embed/B7D9xOh4Jhw'></iframe>
+      <p>CPR for babies</p>
+      <iframe width='200' height='150' controls loop muted src='https://www.youtube.com/embed/n65HW1iJUuY'></iframe>
+      <p>Benefits of Eating Plants!</p>
+      <iframe width='200' height='150' controls loop muted src='https://www.youtube.com/embed/xnKaOL2IBPY'></iframe>
+  </section>
+  <h2>Great Reading</h2>
+
+  `
 }
+
 
 const generateRainbow = (rainbow) => {
   return `
@@ -186,13 +191,13 @@ function generateContactPage() {
 <h2>Contact Us</h2>
 <form>
         <form action="/action_page.php">
-            <label for="fname">Name</label>
+            <label for="name">Name</label>
             <input type="text" id="name" name="name" placeholder="Bernie Brontosaur" required>
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="BernieBronto@veggiepatch.com">
             <label for="subject">Subject</label>
-            <textarea id="subject" name="subject" placeholder="Write something.."></textarea>
-            <button id='contact'>Submit</button>
+            <input type='text' id='subject' placeholder="Write something.."></input>
+            <div class='button'><button id='contact'>Submit</button></div>
 </form>
 `
 }
@@ -201,6 +206,10 @@ function generateContactPage() {
 
 function displayLandingPage() {
   $('main').html(generateLandingPage());
+  //generateBrontoAnimation ();
+}
+function displayInfoPage() {
+  $('main').html(generateInfoPage());
   //generateBrontoAnimation ();
 }
 
@@ -252,6 +261,11 @@ function handleHomeLink() {
     displayLandingPage();
   })
 }
+function handleInfoLink() {
+  $('.infoPage').on('click', function (event) {
+    displayInfoPage();
+  })
+}
 function handleRainbowLink() {
   $('.rainbowPage').on('click', function (event) {
     displayRainbowSection();
@@ -273,6 +287,7 @@ function setUpEventHandlers() {
   handleContactLink();
   handleRainbowLink();
   handleHomeLink();
+  handleInfoLink();
 }
 
 function initializeUI() {
