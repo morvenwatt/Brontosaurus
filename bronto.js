@@ -88,8 +88,10 @@ function generateLandingPage() {
         It shows the nutrition info, and offers recipes involving said item. 
         Enjoy the fun rainbow grid with your little one(s), or just as an adult,
         because, who doesn't love a rainbow? </p>
-        <div class='button'>
-        <button id='rainbowButton'>Check Out The Rainbow!</button> </div> 
+        <div class='buttonLanding'>
+        <button id='rainbowButton'>Check Out The Rainbow!</button> 
+        <button id='goToInfo'>Check Out The Info!</button>
+        </div> 
     `
 }
 
@@ -103,7 +105,6 @@ function generateInfoPage (){
                         <li>Give foods a second, third and fourth chance! Use those recipes and seasonings.</li>
                         <li>Don't stress about mess or try and feed your little one, let them explore the texture, smell and color of each food.</li>
                         <li>Know the difference between choking and gagging - check out the videos below.</li>
-                        <li> Amazon List </li>
                     </ul>
             </section>    
   <h2>Video Information</h2>
@@ -117,8 +118,34 @@ function generateInfoPage (){
       <p>Benefits of Eating Plants!</p>
       <iframe width='200' height='150' controls loop muted src='https://www.youtube.com/embed/xnKaOL2IBPY'></iframe>
   </section>
+  <section class='resources'>
   <h2>Great Reading</h2>
+  <p>There are a ton of great resources out there, both for eating more plants and for baby led weaning.
+  Some of our favorites are <a href='https://nutritionfacts.org/'target='_blank'>Nutrition Facts</a> and 
+  <a href='http://www.babyledweaning.com/'target='_blank'>Baby Led Weaning</a>. 
 
+  Some of our favorite cookbooks include:
+  <ul class='cookbooks'>
+  <li></li>
+  <li></li>
+  <li></li>
+  </ul>
+  <h2>Recommended Items</h2>
+  <p>None of these items are truly 'essential' but, we have them in our home, and we can attest
+  to the fact that they do make things easier when you are feeding a little one and eating a lot 
+  of plants. Making sure you can prep food easily is one of the biggest things you can do to help
+  make life, eating more plants and baby led weaning a lot easier!</p>
+  <ul class='amazonList'>
+  <li><a href='https://www.amazon.com/gp/product/B06VS6XGCJ/ref=ox_sc_act_title_3?smid=AK8KODIOTRXHK&psc=1'target='_blank'>Dishwasher Safe Chopping Boards</a></li>
+  <li><a href='https://www.amazon.com/gp/product/B075MD55N1/ref=ox_sc_act_title_4?smid=A309REJE2CCLMD&psc=1'target='_blank'>Sharp Knives (If they're sharp, they're safer for you!)</a></li>
+  <li><a href='https://www.amazon.com/dp/B01M7SRVC3/ref=dp_cerb_1?th=1'target='_blank'>Mini Food Chopper</a></li>
+  <li><a href='https://www.amazon.com/gp/product/B00MRZIFD0/ref=ox_sc_act_title_5?smid=ATVPDKIKX0DER&psc=1'target='_blank'>Spillproof sippy cup</a></li>
+  <li><a href='https://www.amazon.com/gp/product/B07GTFSQD1/ref=ox_sc_act_title_6?smid=A106IE2VDSG1UK&psc=1'target='_blank'>Floor Mat</a></li>
+  <li><a href='https://www.amazon.com/gp/product/B011F7JK52/ref=ox_sc_act_title_7?smid=A3FK6CY2G2315W&psc=1'target='_blank'>Super strong suction food bowls</a></li>
+  <li><a href='https://www.amazon.com/gp/product/B07GJZDTNV/ref=ox_sc_act_title_8?smid=A2T5AI9FTBZC4G&psc=1'target='_blank'>Perfect cutlery for baby hands!</a></li>
+  <li><a href='https://www.amazon.com/gp/product/B07D1Z4LQ8/ref=ox_sc_act_title_1?smid=A3M17TF4J63QNF&psc=1'target='_blank'>Anti-Choking Device</a></li>
+  </ul>
+  </section>
   `
 }
 
@@ -157,7 +184,7 @@ const generateVeggieInfo = (veggie) => {
     <h2>${veggie.name}</h2>
     <section class='nutrition'>
     <h3>Nutrition Information</h3>
-    <ul>${veggie.nutrition.map(
+    <ul class='nutritionInfo'>${veggie.nutrition.map(
     nutrient => `
       <li>
        ${nutrient.label} ${nutrient.quantity}${nutrient.unit}
@@ -172,16 +199,17 @@ const generateVeggieInfo = (veggie) => {
   ${veggie.recipe.map(
     recipe => {
       let missedIngredients = formatMissedIngredients(recipe.missedIngredients);
-      return `<ul>
+      return `<ul class='recipeList'>
       <li> ${recipe.title} </li>
       <li>${missedIngredients}</li>
       <li>${recipe.usedIngredients[0].original}</li>
-      <li>${recipe.missedIngredients[0].original}</li>
       </li>
       `})}
       </ul>
       </section>
+      <div class='button'>
   <button id='rainbowReturn'>Return to the Rainbow</button>
+  </div>
 </article>`
 }
 
@@ -251,6 +279,11 @@ function handleRainbowReturnButton() {
     displayRainbowSection();
   })
 }
+function handleGoToInfoButton() {
+  $('main').on('click', '#goToInfo', function (event) {
+    displayInfoPage();
+  })
+}
 function handleContactButton() {
   $('main').on('click', '#contact', function (event) {
     //email me? Like make the submit button send an email? Is this possible
@@ -288,6 +321,7 @@ function setUpEventHandlers() {
   handleRainbowLink();
   handleHomeLink();
   handleInfoLink();
+  handleGoToInfoButton();
 }
 
 function initializeUI() {
