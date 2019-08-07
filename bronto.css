@@ -45,6 +45,7 @@ nav.a {
     margin-left: 3px;
 }
 
+
 @media screen and(min-width: 500px){
     nav {
         font-size: 30px;
@@ -87,6 +88,9 @@ nav.a {
     height: 15px;
     margin-bottom: 15px;
 }
+.brontoAnimation {
+    text-align: center;
+}
 @media screen and (min-width: 500px){
     .bronto {
         width: 90px;
@@ -116,6 +120,17 @@ nav.a {
         width: 65px;
         height: 65px;
     }
+}
+@media screen and (min-width: 1200px){
+    .bronto {
+        width: 190px;
+        height: 190px;
+    }
+    .fruit {
+        width: 80px;
+        height: 80px;
+    }
+   
 }
 
 /*Landing Page & Media Query*/
@@ -190,7 +205,7 @@ ul.rainbow {
     list-style-type: none;
     padding: 0px 0px 0px 10px;
 }
-@media screen and (min-width: 500px){}
+
 @media screen and (min-width: 800px){}
 @media screen and (min-width: 1000px){}
 
@@ -212,7 +227,7 @@ ul.rainbow {
 .cookbooks, .amazonList {
     display: block;
 }
- /*HOW DO I DO THIS?*/
+
 @media screen and (min-width: 500px){
     .videoContainer {
         text-align: center;
@@ -220,10 +235,26 @@ ul.rainbow {
 }
 @media screen and (min-width: 800px){
     .videoContainer {
-        text-align: center;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 10% 40% 10% 40%;
+        margin: auto;
+    }
+    iframe {
+        justify-self: center;
     }
 }
-@media screen and (min-width: 1000px){}
+@media screen and (min-width: 1000px){
+    .videoContainer {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 10% 40% 10% 40%;
+        margin: auto;
+    }
+    iframe {
+        justify-self: center;
+    }
+}
 
 /*Items Page*/
 @media screen and (min-width: 1000px){}

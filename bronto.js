@@ -111,13 +111,13 @@ function generateInfoPage (){
   <h2>Video Information</h2>
   <section class='videoContainer'> 
       <p>Baby Led Weaning</p>
-      <iframe width='200' height='150' controls loop muted src="https://www.youtube.com/embed/i6ntYHXP6Xc"></iframe>
       <p>How to Prep food for Babies</p>
-      <iframe width='200' height='150' controls loop muted src='https://www.youtube.com/embed/B7D9xOh4Jhw'></iframe>
+      <iframe width='250' height='200' controls loop muted src="https://www.youtube.com/embed/i6ntYHXP6Xc"></iframe>
+      <iframe width='250' height='200' controls loop muted src='https://www.youtube.com/embed/B7D9xOh4Jhw'></iframe>
       <p>CPR for babies</p>
-      <iframe width='200' height='150' controls loop muted src='https://www.youtube.com/embed/n65HW1iJUuY'></iframe>
       <p>Benefits of Eating Plants!</p>
-      <iframe width='200' height='150' controls loop muted src='https://www.youtube.com/embed/xnKaOL2IBPY'></iframe>
+      <iframe width='250' height='200' controls loop muted src='https://www.youtube.com/embed/n65HW1iJUuY'></iframe>
+      <iframe width='250' height='200' controls loop muted src='https://www.youtube.com/embed/xnKaOL2IBPY'></iframe>
   </section>
   <section class='resources'>
   <h2>Great Reading</h2>
@@ -220,13 +220,13 @@ function generateContactPage() {
   return `
 <h2>Contact Us</h2>
 <form>
-        <form action="/action_page.php">
+        <form action="https://formspree.io/morvenwatt@gmail.com" method="POST">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" placeholder="Bernie Brontosaur" required>
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="BernieBronto@veggiepatch.com">
             <label for="subject">Subject</label>
-            <input type='text' id='subject' placeholder="Write something.."></input>
+            <input type='textarea' id='subject' placeholder='My favorite fruit is mango!'></input>
             <div class='button'><button id='contact'>Submit</button></div>
 </form>
 `
