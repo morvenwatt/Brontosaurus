@@ -104,6 +104,7 @@ function generateInfoPage (){
                         <li>If you've got a 'selective' eater, try and keep things relaxed and simple, i.e. only a couple, or single item at a time.</li>
                         <li>Give foods a second, third and fourth chance! Use those recipes and seasonings.</li>
                         <li>Don't stress about mess or try and feed your little one, let them explore the texture, smell and color of each food.</li>
+                        <li>If they don't like a food, try taking it away, without worrying or commenting, and then re-try it another time.</li>
                         <li>Know the difference between choking and gagging - check out the videos below.</li>
                     </ul>
             </section>    
@@ -199,10 +200,11 @@ const generateVeggieInfo = (veggie) => {
   ${veggie.recipe.map(
     recipe => {
       let missedIngredients = formatMissedIngredients(recipe.missedIngredients);
+      let usedIngredients = (recipe.usedIngredients[0] && recipe.usedIngredients[0].original) || '';
       return `<ul class='recipeList'>
       <li> ${recipe.title} </li>
       <li>${missedIngredients}</li>
-      <li>${recipe.usedIngredients[0].original}</li>
+      <li>${usedIngredients}</li>
       </li>
       `})}
       </ul>
