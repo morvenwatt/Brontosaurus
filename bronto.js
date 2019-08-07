@@ -88,9 +88,13 @@ function generateLandingPage() {
         It shows the nutrition info, and offers recipes involving said item. 
         Enjoy the fun rainbow grid with your little one(s), or just as an adult,
         because, who doesn't love a rainbow? </p>
+       
         <div class='buttonLanding'>
-        <button id='rainbowButton'>Check Out The Rainbow!</button> 
-        <button id='goToInfo'>Check Out The Info!</button>
+
+        <button id='goToInfo'>To The Info!</button>
+
+        <button id='rainbowButton'>To The Rainbow!</button> 
+        
         </div> 
     `
 }
@@ -102,10 +106,10 @@ function generateInfoPage (){
                     <ul class='tricks'>
                         <li>Don't be afraid of herbs and spices! Be careful with spicy foods, but otherwise, let your tastebuds have fun!</li>
                         <li>If you've got a 'selective' eater, try and keep things relaxed and simple, i.e. only a couple, or single item at a time.</li>
-                        <li>Give foods a second, third and fourth chance! Use those recipes and seasonings.</li>
+                        <li>Give foods a second, third and fourth chance! Use those recipes and seasonings. There's a good chance they'll like it a different way.</li>
                         <li>Don't stress about mess or try and feed your little one, let them explore the texture, smell and color of each food.</li>
                         <li>If they don't like a food, try taking it away, without worrying or commenting, and then re-try it another time.</li>
-                        <li>Know the difference between choking and gagging - check out the videos below.</li>
+                        <li>Know the difference between choking and gagging - check out the videos below to get more information on baby led weaning, plant based diets and more!</li>
                     </ul>
             </section>    
   <h2>Video Information</h2>
@@ -125,12 +129,13 @@ function generateInfoPage (){
   Some of our favorites are <a href='https://nutritionfacts.org/'target='_blank'>Nutrition Facts</a> and 
   <a href='http://www.babyledweaning.com/'target='_blank'>Baby Led Weaning</a>. 
 
-  Some of our favorite cookbooks include:
+  Some of our favorite cookbooks include: </p>
   <ul class='cookbooks'>
-  <li></li>
-  <li></li>
-  <li></li>
+  <li><a href='https://www.amazon.com/Baby-Led-Feeding-Natural-Independent-Eaters/dp/0544963407/ref=sr_1_4?crid=3H30SJFXMGMA&keywords=baby+led+weaning&qid=1565216165&s=gateway&sprefix=baby+led+%2Caps%2C188&sr=8-4'target='_blank'>Baby Led Feeding</a></li>
+  <li><a href='https://www.amazon.com/How-Not-Die-Discover-Scientifically-ebook/dp/B00Y7USB14/ref=sr_1_4?keywords=plant+based+diet&qid=1565216226&s=gateway&sr=8-4'target='_blank'>How Not To Die</a></li>
+  <li><a href='https://www.amazon.com/Plant-Powered-Families-Kid-Tested-Whole-Foods-Recipes/dp/1941631045/ref=sr_1_3?keywords=plant+based+diet+for+kids&qid=1565216282&s=gateway&sr=8-3'target='_blank'>Plant Powered Families</a></li>
   </ul>
+
   <h2>Recommended Items</h2>
   <p>None of these items are truly 'essential' but, we have them in our home, and we can attest
   to the fact that they do make things easier when you are feeding a little one and eating a lot 
@@ -226,7 +231,7 @@ function generateContactPage() {
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="BernieBronto@veggiepatch.com">
             <label for="subject">Subject</label>
-            <input type='textarea' id='subject' placeholder='My favorite fruit is mango!'></input>
+            <textarea type='text' id='subject' placeholder='My favorite fruit is mango!'></textarea>
             <div class='button'><button id='contact'>Submit</button></div>
 </form>
 `
