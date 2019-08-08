@@ -1,7 +1,7 @@
 /*Functional Functions*/
 function VeggieOverlord(name, recipe, nutrition) {
   const processedRecipe = recipe && recipe.length ? Object.values(recipe) : 'Recipe Data Not Found'
-  const processedNutrition = nutrition && nutrition.length ? Object.values(nutrition) : 'Nutrition Data Not Found'
+  const processedNutrition = Object.values(nutrition)
   const veggie = {
     name, recipe: processedRecipe, nutrition: processedNutrition
   }
@@ -144,6 +144,9 @@ function generateInfoPage (){
   <li><a href='https://www.amazon.com/gp/product/B07D1Z4LQ8/ref=ox_sc_act_title_1?smid=A3M17TF4J63QNF&psc=1'target='_blank'>Anti-Choking Device</a></li>
   </ul>
   </section>
+  <div class='button'>
+  <button id='rainbowButtonInfo'>To The Rainbow!</button> 
+  </div>
   `
 }
 
@@ -184,13 +187,13 @@ const generateVeggieInfo = (veggie) => {
     <h2>${veggie.name}</h2>
     <section class='nutrition'>
     <h3>Nutrition Information</h3>
-    <ul class='nutritionInfo'>${Array.isArray(veggie.nutrition) ? veggie.nutrition.map(
+    <ul class='nutritionInfo'>${veggie.nutrition.map(
     nutrient => `
       <li>
        ${nutrient.label} ${nutrient.quantity}${nutrient.unit}
       </li>
       `
-  ).join('\n'): veggie.nutrition}
+  ).join('\n')}
   </ul>
 
 </section>
