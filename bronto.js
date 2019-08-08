@@ -1,7 +1,7 @@
 /*Functional Functions*/
 function VeggieOverlord(name, recipe, nutrition) {
-  const processedRecipe = recipe && recipe.length ? Object.values(recipe) : 'Recipe Data Not Found'
-  const processedNutrition = Object.values(nutrition)
+  const processedRecipe = recipe && recipe.length ? Object.values(recipe) : 'Recipe Data Not Found';
+  const processedNutrition = Object.values(nutrition);
   const veggie = {
     name, recipe: processedRecipe, nutrition: processedNutrition
   }
@@ -91,8 +91,8 @@ function generateLandingPage() {
     `
 }
 
-function generateInfoPage (){
-    return `
+function generateInfoPage() {
+  return `
     <section class='tips'>
                 <h2>Tips & Tricks</h2>
                     <ul class='tricks'>
@@ -106,12 +106,12 @@ function generateInfoPage (){
             </section>    
   <h2>Video Information</h2>
   <section class='videoContainer'> 
-      <p>Baby Led Weaning</p>
-      <p>How to Prep food for Babies</p>
+      <p class='videoTitle'>Baby Led Weaning</p>
+      <p class='videoTitle'>How to Prep food for Babies</p>
       <iframe width='250' height='200' controls loop muted src="https://www.youtube.com/embed/i6ntYHXP6Xc"></iframe>
       <iframe width='250' height='200' controls loop muted src='https://www.youtube.com/embed/B7D9xOh4Jhw'></iframe>
-      <p>CPR for babies</p>
-      <p>Benefits of Eating Plants!</p>
+      <p class='videoTitle'>CPR for babies</p>
+      <p class='videoTitle'>Benefits of Eating Plants!</p>
       <iframe width='250' height='200' controls loop muted src='https://www.youtube.com/embed/n65HW1iJUuY'></iframe>
       <iframe width='250' height='200' controls loop muted src='https://www.youtube.com/embed/xnKaOL2IBPY'></iframe>
   </section>
@@ -209,7 +209,7 @@ const generateVeggieInfo = (veggie) => {
       <li>${missedIngredients}</li>
       <li>${usedIngredients}</li>
       </li>
-      `}): veggie.recipe}
+      `}) : veggie.recipe}
       </ul>
       </section>
       <div class='button'>
@@ -283,6 +283,11 @@ function handleRainbowReturnButton() {
     displayRainbowSection();
   })
 }
+function handleRainbowInfoButton() {
+  $('main').on('click', '#rainbowButtonInfo', function (event) {
+    displayRainbowSection();
+  })
+}
 function handleGoToInfoButton() {
   $('main').on('click', '#goToInfo', function (event) {
     displayInfoPage();
@@ -325,6 +330,7 @@ function setUpEventHandlers() {
   handleHomeLink();
   handleInfoLink();
   handleGoToInfoButton();
+  handleRainbowInfoButton();
 }
 
 function initializeUI() {

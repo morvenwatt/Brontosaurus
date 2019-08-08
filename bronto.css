@@ -22,6 +22,10 @@ button {
     text-align: center;
     margin-bottom: 10px;
 }
+a:hover {
+    color:black; 
+}
+
 /*NAV BAR & Media Query*/
 nav {
     font-family: 'Permanent Marker';
@@ -47,6 +51,11 @@ nav.a {
         font-size: 25px;
         height: 80px;
     }
+    nav a:hover {
+        color:black;
+        font-size: 28px; 
+    }
+   
 }
 
 @media screen and (min-width: 800px){
@@ -72,6 +81,9 @@ nav.a {
     h2, h3 {
         font-size: 30px;
     }
+    html {
+        font-size: 25px;
+    }
 }
 
 /*Bronto Animation*/
@@ -80,7 +92,7 @@ nav.a {
         left: 0;
     }
     to {
-        left: 30%;
+        left: 28%;
     }
 }
 @keyframes brontoEatsLeft {
@@ -88,7 +100,7 @@ nav.a {
         right: 0;
     }
     to {
-        right: 30%;
+        right: 28%;
     }
 }
 @keyframes fadeFruit {
@@ -164,7 +176,10 @@ nav.a {
     vertical-align: center;
     margin: 10px auto 10px;
 }
-
+.welcome {
+    margin-left: 10px;
+    margin-right: 10px;
+}
 
 
 /*Grid & Media Query*/
@@ -185,7 +200,9 @@ ul.rainbow {
     list-style-type: none;
     text-align: center;
 }
-
+a:hover {
+    font-size: 15px;
+}
 .green {
     background: linear-gradient(lightgreen, white);
 }
@@ -208,6 +225,9 @@ ul.rainbow {
     .rainbow {
         font-size: 16px;  
     }
+    a:hover {
+        font-size: 18px;
+    }
 
 }
 @media screen and (min-width: 800px){
@@ -216,6 +236,20 @@ ul.rainbow {
     }
     ul {
         grid-auto-rows: 40px;
+    }
+    a:hover {
+        font-size: 22px;
+    }
+}
+@media screen and (min-width: 1200px){
+    .rainbow {
+        font-size: 24px;  
+    }
+    ul {
+        grid-auto-rows: 50px;
+    }
+    a:hover {
+        font-size: 26px;
     }
 }
 
@@ -243,10 +277,16 @@ ul.rainbow {
 
 
 /*Info Page*/
+@media screen and (max-width: 799px){
+    .videoTitle {
+        display: none;
+    }
+}
 .tips {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 85%;
+    margin: auto;
 }
 .tricks {
     display: flex;
@@ -274,8 +314,13 @@ ul.rainbow {
         grid-template-rows: 10% 40% 10% 40%;
         margin: auto;
     }
+    
     iframe {
         justify-self: center;
+    }
+    p.videoTitle {
+        margin: 5px auto;
+
     }
 }
 @media screen and (min-width: 1000px){
@@ -337,8 +382,6 @@ input, textarea {
 /*Footer*/
 footer {
     text-align: center;
-    display: absolute;
-    bottom: 0;
     background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); 
     color: white;
     text-shadow: 0 0 4px black;
