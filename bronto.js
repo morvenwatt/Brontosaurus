@@ -150,11 +150,13 @@ function generateInfoPage (){
 
 const generateRainbow = (rainbow) => {
   return `
+  <section class='container'>
     <ul class="rainbow">
     ${Object.entries(VEGGIE_RAINBOW).map(([color, veggies]) => {
     return veggies.map(veggie => `<li class="rainbow ${color}"><a data-veggie="${veggie}">${veggie}</a></li>`).join("\n")
   }).join('\n')}
     <ul>
+    </section>
     `
 }
 
