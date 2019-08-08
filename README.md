@@ -8,7 +8,7 @@ focus on that item. It also provides useful information on both eating a plant b
 <h2> Live Link: </h2>
 https://morvenwatt.github.io/Brontosaurus/
 
-<img src='readMeScreenshots/brontoScreenshotHome.png'>
+<img src='readMeSceenshots/brontoScreenshotHome.png'>
 <img src='readMeScreenshots/brontoScreenshotGrid.png'>
 <img src='readMeScreenshots/brontoScreenshotInfo.png'>
 <img src='readMeScreenshots/brontoScreenshotRecipe.png'>
