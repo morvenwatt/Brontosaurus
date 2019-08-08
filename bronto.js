@@ -1,11 +1,11 @@
 /*Functional Functions*/
 function VeggieOverlord(name, recipe, nutrition) {
-  const processedRecipe = Object.values(recipe)
-  const processedNutrition = Object.values(nutrition)
+  const processedRecipe = recipe && recipe.length ? Object.values(recipe) : 'Recipe Data Not Found'
+  const processedNutrition = nutrition && nutrition.length ? Object.values(nutrition) : 'Nutrition Data Not Found'
   const veggie = {
     name, recipe: processedRecipe, nutrition: processedNutrition
   }
-  console.log(processedRecipe)
+  console.log(processedNutrition)
   return veggie
 }
 
@@ -33,14 +33,6 @@ const VEGGIE_RAINBOW = {
 }
 
 
-
-/*Bronto Animation*/
-// Get image & use animation to make him eat veggies, use move with fade!
-/* function generateBrontoAnimation () {
-  $('.bronto').toggle("slide", { direction: "right" }, 1000);
-  $('.fruit').fadeOut (8000); BUT - fade each one indiv. so that it looks like he's eating each one. 
-} */
-
 /*API Data*/
 const apiRecipeUrl = 'https://api.spoonacular.com/recipes/findByIngredients';
 const apiSpoonacularKey = '69f82379f1fa466fab11947cdaabe271';
@@ -56,7 +48,7 @@ const getVeggieRecipe = async (veggie) => {
     return responseRecipe;
   }
   else {
-    throw new Error('Recipe Not Found');
+    return null;
   }
 }
 
@@ -67,7 +59,7 @@ const getVeggieNutrition = async (veggie) => {
     return responseNutrition.totalNutrients;
   }
   else {
-    throw new Error('Nutrition Data Not Found');
+    return null;
   }
 }
 
@@ -190,28 +182,29 @@ const generateVeggieInfo = (veggie) => {
     <h2>${veggie.name}</h2>
     <section class='nutrition'>
     <h3>Nutrition Information</h3>
-    <ul class='nutritionInfo'>${veggie.nutrition.map(
+    <ul class='nutritionInfo'>${Array.isArray(veggie.nutrition) ? veggie.nutrition.map(
     nutrient => `
       <li>
        ${nutrient.label} ${nutrient.quantity}${nutrient.unit}
       </li>
       `
-  ).join('\n')}
+  ).join('\n'): veggie.nutrition}
   </ul>
 
 </section>
 <section class='recipe'>
 <h3>Recipe</h3>
-  ${veggie.recipe.map(
+  ${Array.isArray(veggie.recipe) ? veggie.recipe.map(
     recipe => {
       let missedIngredients = formatMissedIngredients(recipe.missedIngredients);
+      //API was kicking back error as it was not finding anything in used ingredients, so this was added//
       let usedIngredients = (recipe.usedIngredients[0] && recipe.usedIngredients[0].original) || '';
       return `<ul class='recipeList'>
       <li> ${recipe.title} </li>
       <li>${missedIngredients}</li>
       <li>${usedIngredients}</li>
       </li>
-      `})}
+      `}): veggie.recipe}
       </ul>
       </section>
       <div class='button'>
@@ -241,11 +234,11 @@ function generateContactPage() {
 
 function displayLandingPage() {
   $('main').html(generateLandingPage());
-  //generateBrontoAnimation ();
+
 }
 function displayInfoPage() {
   $('main').html(generateInfoPage());
-  //generateBrontoAnimation ();
+
 }
 
 const displayRainbowSection = (rainbow = VEGGIE_RAINBOW) => {
@@ -255,7 +248,6 @@ const displayRainbowSection = (rainbow = VEGGIE_RAINBOW) => {
 
 function displayContactPage() {
   $('main').html(generateContactPage());
-  //generateBrontoAnimation();
 }
 
 const displayVeggieInfo = (veggie) => {
@@ -293,7 +285,6 @@ function handleGoToInfoButton() {
 }
 function handleContactButton() {
   $('main').on('click', '#contact', function (event) {
-    //email me? Like make the submit button send an email? Is this possible
   })
 }
 function handleHomeLink() {
@@ -332,7 +323,6 @@ function setUpEventHandlers() {
 }
 
 function initializeUI() {
-  // generateBrontoAnimation ();
   displayLandingPage();
   setUpEventHandlers();
 }

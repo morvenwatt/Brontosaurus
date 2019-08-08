@@ -79,59 +79,88 @@ nav.a {
 }
 
 /*Bronto Animation*/
+@keyframes brontoEatsRight {
+    from {
+        left: 0;
+    }
+    to {
+        left: 30%;
+    }
+}
+@keyframes brontoEatsLeft {
+    from {
+        right: 0;
+    }
+    to {
+        right: 30%;
+    }
+}
+@keyframes fadeFruit {
+    from {
+        opacity: 100%;
+    }
+    to {
+        opacity: 0;
+    }
+}
+@keyframes fruitAppear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100%;
+    }
+}
+
 .bronto {
-    width: 60px;
-    height: 60px;
+    position: relative;
+    width: 16%;
+    height: 16%;
+    animation-duration: 6s;
+    animation-fill-mode: backwards;
+
+}
+.right {
+   animation-name: brontoEatsRight;
+   animation-delay: 0.5s;
+}
+.left {
+    animation-name: brontoEatsLeft;
+    animation-delay: 0.6s;
 }
 .fruit {
-    width: 15px;
-    height: 15px;
+    width: 6%;
+    height: 6%;
     margin-bottom: 15px;
 }
+.fruit {
+    animation-name: fadeFruit, fruitAppear;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    
+}
+.avocado, .grapes {
+    animation-delay: 0.8s, 6.4s;
+}
+.kiwi, .cherry {
+    animation-delay: 1.5s, 6.4s;
+}
+.lemon, .strawberry {
+    animation-delay: 2.5s, 6.4s;
+}
+.banana, .peach {
+    animation-delay: 3.5s, 6.4s;
+}
+.pineapple {
+    animation-delay: 4.5s, 6.4s;
+}
+
 .brontoAnimation {
     text-align: center;
 }
-@media screen and (min-width: 500px){
-    .bronto {
-        width: 90px;
-        height: 90px;
-    }
-    .fruit {
-        width: 25px;
-        height: 25px;
-    }
-}
-@media screen and (min-width: 800px){
-    .bronto {
-        width: 140px;
-        height: 140px;
-    }
-    .fruit {
-        width: 50px;
-        height: 50px;
-    }
-}
-@media screen and (min-width: 1000px){
-    .bronto {
-        width: 160px;
-        height: 160px;
-    }
-    .fruit {
-        width: 65px;
-        height: 65px;
-    }
-}
-@media screen and (min-width: 1200px){
-    .bronto {
-        width: 190px;
-        height: 190px;
-    }
-    .fruit {
-        width: 80px;
-        height: 80px;
-    }
-   
-}
+
+
+
 
 /*Landing Page & Media Query*/
 .buttonLanding {
@@ -140,9 +169,7 @@ nav.a {
     margin: 10px auto 10px;
 }
 
-@media screen and(min-width: 500px){}
-@media screen and(min-width: 800px){}
-@media screen and(min-width: 1000px){}
+
 
 /*Grid & Media Query*/
 ul {
@@ -195,7 +222,7 @@ ul.rainbow {
         grid-auto-rows: 40px;
     }
 }
-@media screen and (min-width: 1000px){}
+
 
 /*Individual Pages & Media Query*/
 .nutritionInfo, .recipeList {
@@ -208,8 +235,7 @@ ul.rainbow {
     padding: 0px 0px 0px 10px;
 }
 
-@media screen and (min-width: 800px){}
-@media screen and (min-width: 1000px){}
+
 
 /*Info Page*/
 .tips {
@@ -258,8 +284,6 @@ ul.rainbow {
     }
 }
 
-/*Items Page*/
-@media screen and (min-width: 1000px){}
 
 /*Contact*/
 form {
@@ -302,24 +326,20 @@ input, textarea {
     }
    
 }
-@media screen and (min-width: 1000px){}
+
 
 /*Footer*/
 footer {
     text-align: center;
+    display: absolute;
+    bottom: 0;
     background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); 
     color: white;
     text-shadow: 0 0 4px black;
 }
 
-/*STYLING TO DO LIST:
-
-MEDIA QUERIES
-
- 
-5. Make animation.
-7. Correctly style tips 'n' tricks list & proofread - add mums one about taking food away etc.
-10. THINK ABOUT: Adding a next recipe button, & way to mark clicked items?
+/*
+ THINK ABOUT: Adding a next recipe button, & way to mark clicked items?
  //page still wouldnt remember when reloaded
  //make your own muthaf'ing API
 
